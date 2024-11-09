@@ -1,0 +1,202 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-height: 100vh;
+}
+.lado-1 {
+    display: flex;
+    flex-direction: column;
+    background: #BC210D;
+    border: none;
+    box-shadow: 0px 0px 18px;
+    padding-top: 15%;
+}
+.lado-1 img {
+    visibility: hidden;
+    width: 100px;
+}
+.lado-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#titulo {
+    color: #fff;
+    font-size: 22pt;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+.icons {
+    width: 50%;
+    height: 40vh;
+    display: block;
+    margin: 24px auto auto;
+}
+.link {
+    display: flex;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 18pt;
+}
+.link a {
+    font-family: "Moulpali", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    position: relative;
+    bottom: 1.5vh;
+    color: #fff;
+    text-decoration: none;
+}
+.link a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.link i {
+    margin-right: 8px;
+}
+.user {
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px;
+}
+.user a {
+    font-size: 18pt;
+    color: #fff;
+    text-decoration: none;
+}
+.user a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.user i {
+    font-size: 20pt;
+    color: #fff;
+    margin-right: 8px;
+}
+#titulo-painel {
+    color: #BC210D;
+    font-size: 22pt;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+#sub-titulo {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #BC210D;
+    font-size: 14pt;
+    text-align: center;
+}
+.box {
+    margin-top: 15px;
+    width: 60vh;
+    height: 8vh;
+    background: #b30000;
+    color: #fff;
+    border-radius: 20px;
+}
+.box:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
+}
+.nome-prof {
+    position: relative;
+    top: 20%;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 14pt;
+    color: #fff;
+}
+.info p {
+    text-align: center;
+    font-size: 14pt;
+    position: relative;
+    top: 3rem;
+}
+.info {
+    visibility: hidden;
+}
+@media (max-width: 993px) {
+    .box {
+        width: 50vh;
+    }
+}
+@media (max-width: 877px) {
+    .container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .icons, .user {
+        visibility: hidden;
+    }
+    #titulo {
+        position: relative;
+        bottom: 5vh;
+    }
+    .link {
+        position: relative;
+        bottom: 5vh;
+        font-size: 14pt;
+    }
+    #titulo-painel {
+        font-size: 18pt;
+    }
+    #sub-titulo {
+        font-size: 14pt;
+    }
+    .container {
+        min-height: 0;
+    }
+    .lado-1 {
+        display: flex;
+        justify-content: center;
+        height: 42vh;
+        border-end-end-radius: 10px;
+        border-end-start-radius: 10px ;
+    }
+    .lado-2 {
+        margin: 5%;
+    }
+    .lado-1 img {
+        width: 100px;
+        height: 100px;
+        margin-top: 40px;
+        visibility: visible;
+    }
+    .box {
+        width: 50vh;
+        height: 20vh;
+    }
+}
+@media (max-width: 503px) {
+    #titulo-painel {
+        font-size: 16pt;
+    }
+    #sub-titulo {
+        font-size: 14pt;
+    }
+    .box {
+        width: 40vh;
+    }
+    .nome-prof {
+        font-size: 12pt;
+    }
+    .info p {
+        text-align: center;
+        font-size: 12pt;
+        position: relative;
+        top: 2.5rem;
+    }
+}

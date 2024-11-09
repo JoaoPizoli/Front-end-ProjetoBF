@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/config.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/img/fav-icon-musical-png.png" type="image/x-icon">
+    <title>Painel de controle - Configurações</title>
+</head>
+<body>
+    <div class="container">
+        <div class="lado-1">
+
+            <img src="../img/img-icon-menu-png.png" alt="" id="menu-icon">
+
+            <p id="titulo">Painel de controle</p>
+            
+            <div class="icons">
+                <div class="link">
+                    <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
+                </div>
+                <div class="link">
+                    <i class="fa-solid fa-gear"></i> <a href="/painel/configuracoes.html">Configurações</a>
+                </div>
+
+                <div class="link">
+                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
+                </div>
+
+                <div class="link">
+                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
+                </div>
+            </div>
+            <div class="user">
+                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Professor</a>
+            </div>
+        </div>
+        <div class="lado-2">
+            <p id="titulo-painel">
+                Configuração
+            </p>
+            <p id="sub-titulo">
+                Altere as informações da sua conta
+            </p>
+            <div class="fomrularios">
+                <form>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="nome" name="nome" placeholder="Nome">
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="senha" name="senha" placeholder="Sua senha">
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="senha-nova" name="senha-nova" placeholder="Nova senha">
+                    </div>
+                </form>
+            </div>
+            <button type="submit" id="alterar">Alterar</button>
+        </div>
+    </div>
+    <script src="../js/script.js"></script>
+</body> 
+</html>
