@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../img/fav-icon-musical-png.png" type="image/x-icon">
+    <script type="module" src="../js/cadastro-aluno.js"></script>
     <title>Painel de controle - Cadastrar aluno</title>
 </head>
 <body>
@@ -56,20 +57,28 @@
                         <input type="text" id="nome" name="nome" placeholder="Nome do aluno">
                     </div>
                     <div class="formulario-icones">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Email do aluno">
+                    </div>
+                    <div class="formulario-icones">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="text" id="numero-mat" name="numero-mat" placeholder="Número da matricula">
+                        <input type="password" id="senha" name="senha" placeholder="Senha">
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-pencil"></i>
                         <input type="text" id="instrumento" name="instrumento" placeholder="Instrumento">
                     </div>
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="senha" name="senha" placeholder="*********">
+                        <i class="fa-solid fa-calendar"></i>
+                        <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento">
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-id-card"></i>
+                        <input type="text" id="matricula" name="matricula" placeholder="Matrícula">
                     </div>
                 </form>
             </div>
-            <button type="submit" id="cadastrar-prof">Cadastrar</button>
+            <button type="submit" id="cadastrar-aluno">Cadastrar</button>
         </div>
     </div>
     <script src="../js/script.js"></script>

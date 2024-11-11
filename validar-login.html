@@ -9,48 +9,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="img/fav-icon-musical-png.png" type="image/x-icon">
-    <title>Página de login</title>
+    <script type="module" src="js/validar.js"></script>
+    <title>Página de login - Validação</title>
 </head>
 <body>
     <div class="container">
         <div class="lado-1">
             <p id="titulo">Bem-vindo</p>
-            <p id="sub-titulo">Acesse sua conta agora mesmo</p>
+            <p id="sub-titulo">Primeiro, precisamos enviar um código de verificação por SMS para validar sua identidade.</p>
         </div>
         <div class="lado-2">
-            <p id="titulo-criar-conta">Faça login em sua conta</p>
-
+            <p id="titulo-criar-conta">Validar sua identidade</p>
+            <p id="sub-titulo-conta">
+                Enviamos um código de verificação por SMS para o seu celular.
+            </p>
             <div class="fomrularios">
                 <form>
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="text" id="matricula" name="matricula" placeholder="Matricula">
-                    </div>
-                    <div class="formulario-icones">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="senha" name="senha" placeholder="*********">
+                        <input type="text" id="codigo-validacao" name="codigo-validacao" placeholder="Código de verificação">
                     </div>
+                    <p id="msg-validacao"></p>
                 </form>
             </div>
-
-            <div class="utilidades">
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" id="manterConectado">
-                    <label for="manterConectado">Manter conectado</label>
-                </div>
-                <p id="esquecu-senha">
-                    <a href="#">Esqueceu a senha?</a>
-                </p>
-            </div>
             
-            <button type="submit" id="entrar">Entrar</button>
+            <button type="submit" id="validar-codigo">Validar</button>
         </div>
     </div>
-    <script>
-        let btn = document.getElementById("registrar")
-        btn.addEventListener('click', function(ev) {
-            location = "validar-login.html"
-        })
-    </script>
+    <script src="js/validar.js"></script>
 </body> 
 </html>
