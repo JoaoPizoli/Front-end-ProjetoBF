@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:8080/'; 
+const apiUrl = 'ec2-3-15-40-195.us-east-2.compute.amazonaws.com'; 
 
 async function login(email, password) {
     try {
