@@ -21,17 +21,16 @@
         <div class="lado-2">
             <p id="titulo-criar-conta">Faça login em sua conta</p>
 
-            <div class="formularios">
-                <form id="loginForm">
+            <div class="fomrularios">
+                <form>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="text" id="email" name="email" placeholder="email" required>
+                        <input type="text" id="email" name="email" placeholder="email">
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="password" name="senha" placeholder="*********" required>
+                        <input type="password" id="password" name="senha" placeholder="*********">
                     </div>
-                    <button type="submit" id="entrar">Entrar</button>
                 </form>
             </div>
 
@@ -44,46 +43,47 @@
                     <a href="#">Esqueceu a senha?</a>
                 </p>
             </div>
+            
+            <button type="submit" id="entrar">Entrar</button>
         </div>
     </div>
-
     <script>
-        const apiUrl = 'http://localhost:8080';
+        const apiUrl = 'https://localhost:8080';
+        const entrar = document.getElementById('entrar');
 
-        // Adiciona evento de submit ao formulário
-        document.getElementById('loginForm').addEventListener('submit', async (event) => {
-            event.preventDefault(); // Evita o comportamento padrão do formulário
+        document.getElementById('entrar').addEventListener('click', async (event) => {
+    event.preventDefault();
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-            const dados = {
-                email,
-                password,
-            };
+    const dados = {
+        email,
+        password,
+    };
 
-            try {
-                const response = await fetch(`${apiUrl}/admin/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(dados),
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    localStorage.setItem('emailUsuario', email);
-                    window.location.href = 'validar-login.html'; 
-                } else {
-                    alert(data.message || 'Erro no login');
-                }
-            } catch (error) {
-                console.error('Erro na requisição:', error);
-                alert('Erro na conexão com a API.');
-            }
+    try {
+        const response = await fetch(`${apiUrl}/admin/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dados),
         });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem('emailUsuario', email);
+            window.location.href = 'validar-login.html';
+        } else {
+            alert(data.message);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
+});
+
     </script>
 </body> 
 </html>
