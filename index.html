@@ -1,15 +1,10 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- ... cabeçalho ... -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="img/fav-icon-musical-png.png" type="image/x-icon">
-
     <title>Página de login</title>
 </head>
 <body>
@@ -20,12 +15,11 @@
         </div>
         <div class="lado-2">
             <p id="titulo-criar-conta">Faça login em sua conta</p>
-
-            <div class="fomrularios">
+            <div class="formularios">
                 <form>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="text" id="email" name="email" placeholder="email">
+                        <input type="text" id="email" name="email" placeholder="Email">
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-lock"></i>
@@ -33,7 +27,6 @@
                     </div>
                 </form>
             </div>
-
             <div class="utilidades">
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="manterConectado">
@@ -43,47 +36,47 @@
                     <a href="#">Esqueceu a senha?</a>
                 </p>
             </div>
-            
             <button type="submit" id="entrar">Entrar</button>
         </div>
     </div>
     <script>
-        const apiUrl = 'http://localhost:8080';
-        const entrar = document.getElementById('entrar');
+        // Seu código JavaScript aqui
+        const apiUrl = 'http://localhost:8080'; // Substitua pelo endereço correto
 
         document.getElementById('entrar').addEventListener('click', async (event) => {
-    event.preventDefault();
+            event.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-    const dados = {
-        email,
-        password,
-    };
+            const dados = {
+                email,
+                password,
+            };
 
-    try {
-        const response = await fetch(`${apiUrl}/admin/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dados),
+            try {
+                const response = await fetch(`${apiUrl}/admin/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dados),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('emailUsuario', email);
+                    alert('Código de verificação enviado para o seu celular.');
+                    window.location.href = 'validar-login.html';
+                } else {
+                    alert(data.message || 'Erro ao fazer login.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao fazer login.');
+            }
         });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            localStorage.setItem('emailUsuario', email);
-            window.location.href = 'validar-login.html';
-        } else {
-            alert(data.message);
-        }
-    } catch (error) {
-        console.error('Erro na requisição:', error);
-    }
-});
-
     </script>
-</body> 
+</body>
 </html>
