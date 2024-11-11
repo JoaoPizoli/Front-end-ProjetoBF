@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="img/fav-icon-musical-png.png" type="image/x-icon">
+
     <title>Página de login</title>
 </head>
 <body>
@@ -24,7 +25,7 @@
                 <form>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="text" id="matricula" name="matricula" placeholder="Matricula">
+                        <input type="text" id="email" name="email" placeholder="email">
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-lock"></i>
@@ -49,8 +50,36 @@
     <script>
         let btn = document.getElementById("entrar")
         btn.addEventListener('click', function(ev) {
-            location = "validar-login.html"
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            login(email,senha);
+            
         })
+        const apiUrl = 'ec2-3-15-40-195.us-east-2.compute.amazonaws.com'; 
+
+        async function login(email, password) {
+         try {
+        const response = await fetch(`${apiUrl}/admin/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem('emailUsuario', email);
+            window.location.href = 'validar-login.html';
+        } else {
+            alert(data.message);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
+}
     </script>
 </body> 
 </html>
