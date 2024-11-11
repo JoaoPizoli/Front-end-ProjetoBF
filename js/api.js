@@ -1,6 +1,5 @@
-const apiUrl = 'ec2-3-15-40-195.us-east-2.compute.amazonaws.com'; 
+const apiUrl = 'http://localhost:8080/'; 
 
-// Função para realizar o login e solicitar o código de verificação
 async function login(email, password) {
     try {
         const response = await fetch(`${apiUrl}/admin/login`, {
