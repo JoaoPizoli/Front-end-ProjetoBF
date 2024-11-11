@@ -36,6 +36,49 @@
             <button type="submit" id="validar-codigo">Validar</button>
         </div>
     </div>
-    <script src="js/validar.js"></script>
+    <script>
+        const apiUrl = 'http://localhost:8080'; // Substitua pelo endereço correto
+
+        document.getElementById('validar-codigo').addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            const code = document.getElementById('codigo-validacao').value;
+            const email = localStorage.getItem('emailUsuario');
+
+            if (!email) {
+                alert('Email não encontrado. Por favor, faça login novamente.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const dados = {
+                email,
+                code,
+            };
+
+            try {
+                const response = await fetch(`${apiUrl}/admin/verify-code`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dados),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('jwtToken', data.token);
+                    alert('Login bem-sucedido!');
+                    window.location.href = 'painel/painel.html';
+                } else {
+                    alert(data.message || 'Erro ao validar o código.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao validar o código.');
+            }
+        });
+    </script>
 </body> 
 </html>
