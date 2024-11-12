@@ -68,6 +68,95 @@
             <button type="submit" id="cadastrar-prof">Cadastrar</button>
         </div>
     </div>
-    <script src="../js/script.js"></script>
+    <script>
+        // script.js
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cadastrarProfBtn = document.getElementById('cadastrar-prof');
+    const cadastroProfForm = document.getElementById('cadastro-professor-form');
+
+    cadastrarProfBtn.addEventListener('click', async (event) => {
+        event.preventDefault(); // Previne o comportamento padrão do botão
+
+        // Coletar os valores do formulário
+        const numeroMatricula = document.getElementById('numero-mat').value.trim();
+        const nome = document.getElementById('nome').value.trim();
+        const instrumento = document.getElementById('instrumento').value.trim();
+
+        // Validar os dados (já que os campos são required, esta validação é adicional)
+        if (!numeroMatricula || !nome || !instrumento) {
+            displayMessage('Por favor, preencha todos os campos.', 'error');
+            return;
+        }
+
+        const dados = {
+            numeroMatricula, 
+            nome,
+            instrumento
+        };
+
+        // Obter o token de autenticação (assumindo que está armazenado no localStorage após login)
+        const token = localStorage.getItem('token'); // Substitua 'token' pela chave correta, se for diferente
+
+        if (!token) {
+            displayMessage('Usuário não autenticado. Por favor, faça login novamente.', 'error');
+            window.location.href = '/login.html'; // Redirecionar para a página de login
+            return;
+        }
+
+        try {
+            const response = await fetch('https://projetobf.duckdns.org/professores', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` // Inclua o token no cabeçalho, se necessário
+                },
+                body: JSON.stringify(dados)
+            });
+
+            const resultado = await response.json();
+
+            if (response.ok) {
+                displayMessage('Professor cadastrado com sucesso!', 'success');
+                // Opcional: Redirecionar ou limpar o formulário
+                cadastroProfForm.reset();
+                // window.location.href = '/painel/cadastrar-professor.html'; // Ajuste conforme necessário
+            } else {
+                displayMessage(resultado.message || 'Erro ao cadastrar professor.', 'error');
+            }
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+            displayMessage('Erro ao cadastrar professor.', 'error');
+        }
+    });
+
+    /**
+ 
+     * @param {string} message - A mensagem a ser exibida
+     * @param {string} type - O tipo da mensagem ('success' ou 'error')
+     */
+    function displayMessage(message, type) {
+        // Verifica se já existe uma mensagem exibida
+        let messageDiv = document.querySelector('.message');
+        if (messageDiv) {
+            messageDiv.remove();
+        }
+
+        // Cria um elemento de mensagem
+        messageDiv = document.createElement('div');
+        messageDiv.className = `message ${type}`;
+        messageDiv.innerText = message;
+
+        // Adiciona a mensagem ao início do corpo do documento
+        document.body.prepend(messageDiv);
+
+        // Remove a mensagem após 3 segundos
+        setTimeout(() => {
+            messageDiv.remove();
+        }, 3000);
+    }
+});
+
+    </script>
 </body> 
 </html>
