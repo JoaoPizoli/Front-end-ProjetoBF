@@ -62,7 +62,7 @@
         </div>
     </div>
     <script>
-       const apiUrl = 'https://projetobf.duckdns.org/professor'; 
+       const apiUrl = 'https://projetobf.duckdns.org/professores'; 
 
         document.getElementById('cadastro-professor-form-submit').addEventListener('click', async (event) => {
 
@@ -82,10 +82,10 @@
                 const response = await fetch(`${apiUrl}`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(dados),
-                });
+                })
 
                 const data = await response.json();
 
