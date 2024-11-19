@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de controle - Cadastrar Professor</title>
-    <!-- Links de CSS e Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -59,18 +58,17 @@
                     </div>
                 </form>
             </div>
-            <button type="submit" id="cadastrar-prof">Cadastrar</button>
+            <button type="submit" id="cadastro-professor-form">Cadastrar</button>
         </div>
     </div>
     <script>
        const apiUrl = 'https://projetobf.duckdns.org/professor'; 
 
-        document.getElementById('cadastar-prof').addEventListener('click', async (event) => {
+        document.getElementById('cadastro-professor-form').addEventListener('click', async (event) => {
 
             const nome = document.getElementById('nome').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('senha').value;
-            const areaAtuacao = document.getElementById('area').value;
 
             const dados = {
                 nome,
