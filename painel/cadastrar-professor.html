@@ -90,6 +90,7 @@
                 const data = await response.json();
 
                 if (response.ok) {
+                    localStorage.setItem('jwtToken', data.token);
                     alert('Professor cadastrado!');
                 } else {
                     alert(data.message || 'Erro ao cadastrar professor');
