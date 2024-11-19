@@ -58,13 +58,13 @@
                     </div>
                 </form>
             </div>
-            <button type="submit" id="cadastro-professor-form">Cadastrar</button>
+            <button type="submit" id="cadastro-professor-form-submit">Cadastrar</button>
         </div>
     </div>
     <script>
        const apiUrl = 'https://projetobf.duckdns.org/professor'; 
 
-        document.getElementById('cadastro-professor-form').addEventListener('click', async (event) => {
+        document.getElementById('cadastro-professor-form-submit').addEventListener('click', async (event) => {
 
             const nome = document.getElementById('nome').value;
             const email = document.getElementById('email').value;
