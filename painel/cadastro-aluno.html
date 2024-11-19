@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cadastroAlunoForm = document.getElementById('cadastro-aluno-form');
 
     cadastrarAlunoBtn.addEventListener('click', async (event) => {
-        event.preventDefault(); // Previne o comportamento padrão do botão
+        event.preventDefault(); 
 
 
         const nome = document.getElementById('nome').value.trim();
@@ -115,12 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
             matricula
         };
 
-       
-        const token = localStorage.getItem('token'); 
-
         if (!token) {
             alert('Usuário não autenticado. Por favor, faça login novamente.');
-            window.location.href = '/login.html'; 
             return;
         }
 
@@ -129,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // Inclua o token no cabeçalho, se necessário
+                    'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
                 },
                 body: JSON.stringify(dados)
             });
