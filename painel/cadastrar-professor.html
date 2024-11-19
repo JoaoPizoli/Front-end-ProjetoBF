@@ -82,7 +82,8 @@
                 const response = await fetch(`${apiUrl}`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
                     },
                     body: JSON.stringify(dados),
                 })
@@ -90,7 +91,6 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    localStorage.setItem('jwtToken', data.token);
                     alert('Professor cadastrado!');
                 } else {
                     alert(data.message || 'Erro ao cadastrar professor');
