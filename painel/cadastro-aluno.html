@@ -77,47 +77,42 @@
         </div>
     </div>
     <script>
-        const apiUrl = 'https://projetobf.duckdns.org/alunos'; 
- 
-         document.getElementById('cadastrar-aluno').addEventListener('click', async (event) => {
- 
-             const nome = document.getElementById('nome').value;
-             const email = document.getElementById('email').value;
-             const instrumento = document.getElementById('instrumento').value;
-             const matricula = document.getElementById('matricula').value;
-             const dataNascimento = document.getElementById('dataNascimento').value;
- 
-             const dados = {
-                 nome,
-                 email,
-                 instrumento,
-                 dataNascimento,
-                 matricula
-             };
- 
-             try {
-                 const response = await fetch(`${apiUrl}`, {
-                     method: 'POST',
-                     headers: {
-                         'Content-Type': 'application/json',
-                         'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
-                     },
-                     body: JSON.stringify(dados),
-                 })
- 
-                 const data = await response.json();
- 
-                 if (response.ok) {
-                     alert('Aluno cadastrado!');
-                     
-                 } else {
-                     alert(data.message || 'Erro ao cadastrar Aluno');
-                 }
-             } catch (error) {
-                 console.error('Erro na requisição:', error);
-                 alert('Erro ao cadastrar Aluno');
-             }
-         });
-     </script>
+        document.getElementById('criar-aluno-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const instrumento = document.getElementById('instrumento').value.trim();
+            const matricula = document.getElementById('matricula').value.trim();
+            const dataNascimento = document.getElementById('dataNascimento').value.trim();
+
+            const dados = { nome, email, phoneNumber, instrumento, matricula, dataNascimento };
+
+            try {
+                const response = await fetch('https://projetobf.duckdns.org/alunos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Remova ou ajuste headers relacionados a autenticação conforme necessário
+                    },
+                    // credentials: 'include', // Inclua se estiver usando sessões
+                    body: JSON.stringify(dados),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Aluno criado com sucesso!');
+                    window.location.href = 'painel/painel.html';
+                } else {
+                    alert(data.message || 'Erro ao criar aluno.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao criar aluno.');
+            }
+        });
+    </script>
 </body> 
 </html>
