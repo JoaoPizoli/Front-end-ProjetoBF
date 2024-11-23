@@ -60,17 +60,22 @@
                         <input type="email" id="email" name="email" placeholder="Email do aluno" required>
                     </div>
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-pencil"></i>
-                        <input type="text" id="instrumento" name="instrumento" placeholder="Instrumento" required>
+                        <i class="fa-solid fa-id-card"></i>
+                        <input type="number" id="phoneNumber" name="Telefone" placeholder="Telefone do Aluno" required>
                     </div>
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-calendar"></i>
-                        <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" required>
+                        <i class="fa-solid fa-pencil"></i>
+                        <input type="text" id="instrumento" name="instrumento" placeholder="Instrumento" required>
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-id-card"></i>
                         <input type="text" id="matricula" name="matricula" placeholder="Matrícula" required>
                     </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-calendar"></i>
+                        <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" required>
+                    </div>
+                
                 </form>
             </div>
             <button type="submit" id="cadastrar-aluno">Cadastrar</button>
@@ -80,12 +85,12 @@
         document.getElementById('cadastrar-aluno').addEventListener('click', async (event) => {
             event.preventDefault();
 
-            const nome = document.getElementById('nome').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phoneNumber = document.getElementById('phoneNumber').value.trim();
-            const instrumento = document.getElementById('instrumento').value.trim();
-            const matricula = document.getElementById('matricula').value.trim();
-            const dataNascimento = document.getElementById('dataNascimento').value.trim();
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const instrumento = document.getElementById('instrumento').value;
+            const matricula = document.getElementById('matricula').value
+            const dataNascimento = document.getElementById('dataNascimento').value;
 
             const dados = { nome, email, phoneNumber, instrumento, matricula, dataNascimento };
 
@@ -96,7 +101,6 @@
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
                     },
-                    // credentials: 'include', // Inclua se estiver usando sessões
                     body: JSON.stringify(dados),
                 });
 
