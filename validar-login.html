@@ -37,13 +37,13 @@
         </div>
     </div>
     <script>
-        const apiUrl = 'https://projetobf.duckdns.org'; 
+    
 
         document.getElementById('validar-codigo').addEventListener('click', async (event) => {
             event.preventDefault();
 
             const code = document.getElementById('codigo-validacao').value;
-            const email = localStorage.getItem('emailUsuario');
+            const email = localStorage.getItem('email');
 
             if (!email) {
                 alert('Email não encontrado. Por favor, faça login novamente.');
@@ -57,7 +57,7 @@
             };
 
             try {
-                const response = await fetch(`${apiUrl}/admin/verify-code`, {
+                const response = await fetch(`https://projetobf.duckdns.org/admin/verify-code`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

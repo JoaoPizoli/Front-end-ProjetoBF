@@ -66,7 +66,7 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    localStorage.setItem('emailUsuario', email);
+                    localStorage.setItem('email', email);
                     alert('Código de verificação enviado para o seu celular.');
                     window.location.href = 'validar-login.html';
                 } else {
