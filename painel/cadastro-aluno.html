@@ -77,7 +77,7 @@
         </div>
     </div>
     <script>
-        document.getElementById('criar-aluno-form').addEventListener('submit', async (event) => {
+        document.getElementById('cadastrar-aluno').addEventListener('click', async (event) => {
             event.preventDefault();
 
             const nome = document.getElementById('nome').value.trim();
@@ -94,7 +94,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        // Remova ou ajuste headers relacionados a autenticação conforme necessário
+                        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
                     },
                     // credentials: 'include', // Inclua se estiver usando sessões
                     body: JSON.stringify(dados),
