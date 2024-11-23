@@ -1,11 +1,16 @@
-<!-- index.html -->
+<!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- ... cabeçalho ... -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="img/fav-icon-musical-png.png" type="image/x-icon">
-    <title>Página de login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="container">
@@ -19,11 +24,11 @@
                 <form>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="text" id="email" name="email" placeholder="Email">
+                        <input type="text" id="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="password" name="senha" placeholder="*********">
+                        <input type="password" id="password" name="senha" placeholder="*********" required>
                     </div>
                 </form>
             </div>
@@ -40,14 +45,19 @@
         </div>
     </div>
     <script>
-        // Seu código JavaScript aqui
-       const apiUrl = 'https://projetobf.duckdns.org/admin/login'; 
+        // URL correta da API com HTTP e porta 8080
+        const apiUrl = 'https://projetobf.duckdns.org/admin/login'; 
 
         document.getElementById('entrar').addEventListener('click', async (event) => {
             event.preventDefault();
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!email || !password) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
 
             const dados = {
                 email,
@@ -55,7 +65,7 @@
             };
 
             try {
-                const response = await fetch(`${apiUrl}`, {
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -66,7 +76,7 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    localStorage.setItem('email', email);
+                    localStorage.setItem('emailUsuario', email);
                     alert('Código de verificação enviado para o seu celular.');
                     window.location.href = 'validar-login.html';
                 } else {
@@ -78,5 +88,5 @@
             }
         });
     </script>
-</body>
+</body> 
 </html>
