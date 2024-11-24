@@ -1,0 +1,293 @@
+/* editar-professor.css */
+
+/* Reset e Box Sizing */
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+/* Container Principal */
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-height: 100vh;
+}
+
+/* Barra Lateral */
+.lado-1 {
+    display: flex;
+    flex-direction: column;
+    background: #BC210D;
+    border: none;
+    box-shadow: 0px 0px 18px;
+    padding-top: 15%;
+}
+
+/* Ícone do Menu */
+.lado-1 img {
+    visibility: hidden;
+    width: 100px;
+}
+
+/* Área Principal */
+.lado-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Título Principal */
+#titulo {
+    color: #fff;
+    font-size: 22pt;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* Subtítulo do Painel */
+#sub-titulo-painel {
+    color: #fff;
+    font-size: 14pt;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* Ícones de Navegação */
+.icons {
+    width: 50%;
+    height: 40vh;
+    display: block;
+    margin: 24px auto auto;
+}
+
+/* Links de Navegação */
+.link {
+    display: flex;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 18pt;
+}
+
+.link a {
+    font-family: "Moulpali", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    position: relative;
+    bottom: 1.5vh;
+    color: #fff;
+    text-decoration: none;
+}
+
+.link a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.link i {
+    margin-right: 8px;
+}
+
+/* Informações do Usuário */
+.user {
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px;
+}
+
+.user a {
+    font-size: 18pt;
+    color: #fff;
+    text-decoration: none;
+}
+
+.user a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.user i {
+    font-size: 20pt;
+    color: #fff;
+    margin-right: 8px;
+}
+
+/* Título do Painel */
+#titulo-painel {
+    color: #BC210D;
+    font-size: 22pt;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* Subtítulo */
+#sub-titulo {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #BC210D;
+    font-size: 14pt;
+    text-align: center;
+}
+
+/* Contêiner de Formulários */
+.formularios {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Ícones no Formulário */
+.formulario-icones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Ícones Dentro dos Formulários */
+.formulario-icones i {
+    position: relative;
+    left: 5vh;
+    color: #9C9C9C;
+    margin-right: 10px;
+}
+
+/* Campos de Entrada */
+.formularios input {
+    display: flex;
+    margin: 10px;
+    flex-direction: column;
+    width: 60vh;
+    height: 60px;
+    border: none;
+    outline: none;
+    padding: 24px 20px 20px 50px;
+    background: #f5f5f5;
+    border-radius: 5px;
+}
+
+/* Placeholder */
+::placeholder {
+    color: #9C9C9C;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Botão de Salvar Alterações */
+#editar-professor-submit {
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    border: none;
+    background: #b30000;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    transition: 0.5s;
+    text-transform: uppercase;
+    margin: 25px;
+}
+
+#editar-professor-submit:hover {
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 996px) {
+    .titulo {
+        font-size: 18pt;
+    }
+    .link {
+        display: flex;
+        margin-bottom: 10px;
+        color: #fff;
+        font-size: 14pt;
+    }
+}
+
+@media (max-width: 877px) {
+    .container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .icons, .user {
+        visibility: hidden;
+    }
+    #titulo {
+        position: relative;
+        bottom: 5vh;
+    }
+    .link {
+        position: relative;
+        bottom: 5vh;
+        font-size: 14pt;
+    }
+    #titulo-painel {
+        font-size: 18pt;
+    }
+    #sub-titulo {
+        font-size: 14pt;
+    }
+    .container {
+        min-height: 0;
+    }
+    .lado-1 {
+        display: flex;
+        justify-content: center;
+        height: 42vh;
+        border-end-end-radius: 10px;
+        border-end-start-radius: 10px;
+    }
+    .lado-2 {
+        margin: 5%;
+    }
+    .lado-1 img {
+        width: 100px;
+        height: 100px;
+        margin-top: 40px;
+        visibility: visible;
+    }
+    .formularios input {
+        width: 40vh;
+    }
+}
+
+@media (max-width: 568px) {
+    .lado-1 img {
+        height: 200px;
+        padding-top: 50px;
+    }
+    .formularios input {
+        width: 40vh;
+        height: 60px;
+    }
+}
+
+@media (max-width: 375px) {
+    #titulo {
+        position: relative;
+        bottom: 10vh;
+        font-size: 14pt;
+    }
+    .link {
+        position: relative;
+        bottom: 10vh;
+        font-size: 12pt;
+    }
+    .lado-1 img {
+        position: relative;
+        bottom: 4vh;
+    }
+    #titulo-painel, #sub-titulo {
+        font-size: 14pt;
+    }
+}

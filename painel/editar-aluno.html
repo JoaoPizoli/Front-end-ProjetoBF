@@ -1,0 +1,184 @@
+<!-- public/painel/editar-aluno.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - Editar Aluno</title>
+    <link rel="stylesheet" href="../css/editar-info.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="../img/fav-icon-musical-png.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/editar-aluno.css">
+    <script src="../js/script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Barra Lateral -->
+        <div class="lado-1">
+            <img src="../img/img-icon-menu-png.png" alt="Ícone Menu" id="menu-icon">
+            <p id="titulo">Painel de Controle</p>
+            <p id="sub-titulo-painel">Cargo: Administrador</p>
+            
+            <div class="icons">
+                <div class="link">
+                    <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
+                </div>
+                <div class="link">
+                    <i class="fa-solid fa-gear"></i> <a href="/painel/configuracoes.html">Configurações</a>
+                </div>
+                <div class="link">
+                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar Professor</a>
+                </div>
+                <div class="link">
+                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar Aluno</a>
+                </div>
+            </div>
+            <div class="user">
+                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Administrador</a>
+            </div>
+        </div>
+
+        <!-- Área Principal -->
+        <div class="lado-2">
+            <p id="titulo-painel">Editar Aluno</p>
+            <p id="sub-titulo">Altere as informações do aluno selecionado.</p>
+            
+            <div class="formularios">
+                <form id="editar-aluno-form">
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-user-graduate"></i>
+                        <input type="text" id="nome" name="nome" placeholder="Nome do Aluno" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Email do Aluno" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Telefone do Aluno" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-guitar"></i>
+                        <input type="text" id="instrumento" name="instrumento" placeholder="Instrumento" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-id-card"></i>
+                        <input type="text" id="matricula" name="matricula" placeholder="Matrícula" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-calendar"></i>
+                        <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" required>
+                    </div>
+                </form>
+            </div>
+            <button type="submit" id="editar-aluno-submit">Salvar Alterações</button>
+        </div>
+    </div>
+
+    <script>
+        const apiUrl = 'https://projetobf.duckdns.org/alunos';
+
+        // Função para obter parâmetros da URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Função para buscar dados do aluno por ID
+        async function fetchAluno(id) {
+            const token = localStorage.getItem('jwtToken');
+            try {
+                const response = await fetch(`${apiUrl}/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const aluno = await response.json();
+
+                if (response.ok && aluno) {
+                    document.getElementById('nome').value = aluno.nome;
+                    document.getElementById('email').value = aluno.email;
+                    document.getElementById('phoneNumber').value = aluno.phoneNumber;
+                    document.getElementById('instrumento').value = aluno.instrumento;
+                    document.getElementById('matricula').value = aluno.matricula;
+                    document.getElementById('dataNascimento').value = aluno.dataNascimento.split('T')[0];
+                } else {
+                    alert('Aluno não encontrado.');
+                    window.location.href = 'alunos-cadastrados.html';
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao buscar aluno.');
+            }
+        }
+
+        // Função para atualizar dados do aluno
+        async function updateAluno(id, dados) {
+            const token = localStorage.getItem('jwtToken');
+            try {
+                const response = await fetch(`${apiUrl}/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(dados),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert(result.message);
+                    window.location.href = 'alunos-cadastrados.html';
+                } else {
+                    alert(result.message || 'Erro ao atualizar aluno.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao atualizar aluno.');
+            }
+        }
+
+        // Evento para o botão de salvar alterações
+        document.getElementById('editar-aluno-submit').addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            const id = getQueryParam('id');
+            if (!id) {
+                alert('ID do aluno não fornecido.');
+                window.location.href = 'alunos-cadastrados.html';
+                return;
+            }
+
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const instrumento = document.getElementById('instrumento').value.trim();
+            const matricula = document.getElementById('matricula').value.trim();
+            const dataNascimento = document.getElementById('dataNascimento').value;
+
+            if (!nome || !email || !phoneNumber || !instrumento || !matricula || !dataNascimento) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            const dados = { nome, email, phoneNumber, instrumento, matricula, dataNascimento };
+
+            await updateAluno(id, dados);
+        });
+
+        // Carregar os dados do aluno ao carregar a página
+        window.onload = () => {
+            const id = getQueryParam('id');
+            if (id) {
+                fetchAluno(id);
+            } else {
+                alert('ID do aluno não fornecido.');
+                window.location.href = 'alunos-cadastrados.html';
+            }
+        };
+    </script>
+</body>
+</html>

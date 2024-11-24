@@ -1,25 +1,18 @@
+<!-- public/painel/alunos-cadastrados.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Painel de Controle - Alunos Cadastrados</title>
     <link rel="stylesheet" href="../css/lista-alunos.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="../img/img/fav-icon-musical-png.png" type="image/x-icon">
-    <title>Painel de controle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="../img/fav-icon-musical-png.png" type="image/x-icon">
 </head>
 <body>
     <div class="container">
         <div class="lado-1">
-
             <img src="../img/img-icon-menu-png.png" alt="" id="menu-icon">
-
             <p id="titulo">Painel de controle</p>
             <p id="sub-ttulo-painel">Cargo: Administrador</p>
             
@@ -30,98 +23,171 @@
                 <div class="link">
                     <i class="fa-solid fa-gear"></i> <a href="/painel/configuracoes.html">Configurações</a>
                 </div>
-
                 <div class="link">
                     <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
                 </div>
-
                 <div class="link">
                     <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
                 </div>
             </div>
             <div class="user">
-                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Professor</a>
+                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Administrador</a>
             </div>
         </div>
         <div class="lado-2">
-            <p id="titulo-painel">
-                Alunos
-            </p>
-                        <p id="sub-titulo">
-                Aqui você pode acessar as principais funções do sistema.
-            </p>
-            <select id="professor-select">
-                <option value="" disabled selected>Escolha o professor</option>
-                <option value="professor-bateria">Professor de Violão</option>
-                <option value="professor-violao">Professor de Violino</option>
-                <option value="professor-violao">Professor de Piano</option>
-                <option value="professor-violao">Professor de Flauta</option>
-                <option value="professor-violao">Professor de Bateria</option>
+            <p id="titulo-painel">Alunos Cadastrados</p>
+            <p id="sub-titulo">Aqui você pode visualizar, editar e excluir os alunos registrados no sistema.</p>
+            
+            <select id="instrumento-select">
+                <option value="" disabled selected>Escolha o instrumento</option>
+                <option value="Violão">Violão</option>
+                <option value="Violino">Violino</option>
+                <option value="Piano">Piano</option>
+                <option value="Flauta">Flauta</option>
+                <option value="Bateria">Bateria</option>
             </select>
-            <div class="container-box">
-                <div class="box">
-                    <br>
-                    <p id="titulo-box">Aluno:</p>
-                    <p id="nome-aluno"><strong>Nome:</strong> Nivaldo andrade</p>
-                    <p id="email-aluno"><strong>Email:</strong> nivaldo@teste.com</p>
-                    <p id="telefone-aluno"><strong>Telefone:</strong> (19) 9999-9999</p>
-                    <p id="area-atuacao"><strong>Instrumento:</strong> Violão</p>
-                    <p id="matricula-aluno"><strong>Matrícula:</strong> 2300093</p>
-                    <p id="aluno-data-nascimento"><strong>Data de nascimento:</strong> 11/03/2004</p>
-                    <br>
-                    <button id="editar-infomacoes"><a href="editar-informacoes.html">Editar informações</a></button>
-                </div>
-                <div class="box">
-                    <br>
-                    <p id="titulo-box">Aluno:</p>
-                    <p id="nome-aluno"><strong>Nome:</strong> Nivaldo andrade</p>
-                    <p id="email-aluno"><strong>Email:</strong> nivaldo@teste.com</p>
-                    <p id="telefone-aluno"><strong>Telefone:</strong> (19) 9999-9999</p>
-                    <p id="area-atuacao"><strong>Instrumento:</strong> Violão</p>
-                    <p id="matricula-aluno"><strong>Matrícula:</strong> 2300093</p>
-                    <p id="aluno-data-nascimento"><strong>Data de nascimento:</strong> 11/03/2004</p>
-                    <br>
-                    <button id="editar-infomacoes"><a href="editar-informacoes.html">Editar informações</a></button>
-                </div>
-                <div class="box">
-                    <br>
-                    <p id="titulo-box">Aluno:</p>
-                    <p id="nome-aluno"><strong>Nome:</strong> Nivaldo andrade</p>
-                    <p id="email-aluno"><strong>Email:</strong> nivaldo@teste.com</p>
-                    <p id="telefone-aluno"><strong>Telefone:</strong> (19) 9999-9999</p>
-                    <p id="area-atuacao"><strong>Instrumento:</strong> Violão</p>
-                    <p id="matricula-aluno"><strong>Matrícula:</strong> 2300093</p>
-                    <p id="aluno-data-nascimento"><strong>Data de nascimento:</strong> 11/03/2004</p>
-                    <br>
-                    <button id="editar-infomacoes"><a href="editar-informacoes.html">Editar informações</a></button>
-                </div>
-                <div class="box">
-                    <br>
-                    <p id="titulo-box">Aluno:</p>
-                    <p id="nome-aluno"><strong>Nome:</strong> Nivaldo andrade</p>
-                    <p id="email-aluno"><strong>Email:</strong> nivaldo@teste.com</p>
-                    <p id="telefone-aluno"><strong>Telefone:</strong> (19) 9999-9999</p>
-                    <p id="area-atuacao"><strong>Instrumento:</strong> Violão</p>
-                    <p id="matricula-aluno"><strong>Matrícula:</strong> 2300093</p>
-                    <p id="aluno-data-nascimento"><strong>Data de nascimento:</strong> 11/03/2004</p>
-                    <br>
-                    <button id="editar-infomacoes"><a href="editar-informacoes.html">Editar informações</a></button>
-                </div>
-                <div class="box">
-                    <br>
-                    <p id="titulo-box">Aluno:</p>
-                    <p id="nome-aluno"><strong>Nome:</strong> Nivaldo andrade</p>
-                    <p id="email-aluno"><strong>Email:</strong> nivaldo@teste.com</p>
-                    <p id="telefone-aluno"><strong>Telefone:</strong> (19) 9999-9999</p>
-                    <p id="area-atuacao"><strong>Instrumento:</strong> Violão</p>
-                    <p id="matricula-aluno"><strong>Matrícula:</strong> 2300093</p>
-                    <p id="aluno-data-nascimento"><strong>Data de nascimento:</strong> 11/03/2004</p>
-                    <br>
-                    <button id="editar-infomacoes"><a href="editar-informacoes.html">Editar informações</a></button>
-                </div>
+            
+            <div class="container-box" id="alunos-container">
+                <!-- Alunos serão carregados aqui via JavaScript -->
             </div>
         </div>
     </div>
-    <script src="../js/script.js"></script>
-</body> 
+
+    <script>
+        const apiUrl = 'https://projetobf.duckdns.org/alunos';
+
+        // Função para buscar todos os alunos
+        async function fetchAlunos() {
+            const token = localStorage.getItem('jwtToken');
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const alunos = await response.json();
+
+                if (response.ok) {
+                    renderAlunos(alunos);
+                } else {
+                    alert(alunos.message || 'Erro ao buscar alunos.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao buscar alunos.');
+            }
+        }
+
+        // Função para buscar alunos por instrumento
+        async function fetchAlunosByInstrumento(instrumento) {
+            const token = localStorage.getItem('jwtToken');
+            try {
+                const response = await fetch(`${apiUrl}/instrumento/${instrumento}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const alunos = await response.json();
+
+                if (response.ok) {
+                    renderAlunos(alunos);
+                } else {
+                    alert(alunos.message || 'Erro ao buscar alunos por instrumento.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao buscar alunos por instrumento.');
+            }
+        }
+
+        // Função para deletar um aluno
+        async function deleteAluno(id) {
+            const token = localStorage.getItem('jwtToken');
+            try {
+                const response = await fetch(`${apiUrl}/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert(result.message);
+                    fetchAlunos(); // Recarregar a lista de alunos
+                } else {
+                    alert(result.message || 'Erro ao deletar aluno.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao deletar aluno.');
+            }
+        }
+
+        // Função para renderizar os alunos na tela
+        function renderAlunos(alunos) {
+            const container = document.getElementById('alunos-container');
+            container.innerHTML = '';
+
+            if (alunos.length === 0) {
+                container.innerHTML = '<p>Nenhum aluno encontrado.</p>';
+                return;
+            }
+
+            alunos.forEach(aluno => {
+                const box = document.createElement('div');
+                box.classList.add('box');
+
+                box.innerHTML = `
+                    <p id="titulo-box">Aluno:</p>
+                    <p id="nome-aluno"><strong>Nome:</strong> ${aluno.nome}</p>
+                    <p id="email-aluno"><strong>Email:</strong> ${aluno.email}</p>
+                    <p id="telefone-aluno"><strong>Telefone:</strong> ${aluno.phoneNumber}</p>
+                    <p id="instrumento-aluno"><strong>Instrumento:</strong> ${aluno.instrumento}</p>
+                    <p id="matricula-aluno"><strong>Matrícula:</strong> ${aluno.matricula}</p>
+                    <p id="data-nascimento-aluno"><strong>Data de Nascimento:</strong> ${new Date(aluno.dataNascimento).toLocaleDateString()}</p>
+                    <br>
+                    <button class="editar-aluno" data-id="${aluno.id}">Editar Informações</button>
+                    <button class="deletar-aluno" data-id="${aluno.id}">Excluir Aluno</button>
+                `;
+
+                container.appendChild(box);
+            });
+
+            // Adicionar eventos para os botões de editar
+            document.querySelectorAll('.editar-aluno').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    window.location.href = `editar-aluno.html?id=${id}`;
+                });
+            });
+
+            // Adicionar eventos para os botões de deletar
+            document.querySelectorAll('.deletar-aluno').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const id = button.getAttribute('data-id');
+                    if (confirm('Tem certeza que deseja excluir este aluno?')) {
+                        await deleteAluno(id);
+                    }
+                });
+            });
+        }
+
+        // Evento para o seletor de instrumento
+        document.getElementById('instrumento-select').addEventListener('change', async (event) => {
+            const instrumento = event.target.value;
+            if (instrumento) {
+                await fetchAlunosByInstrumento(instrumento);
+            }
+        });
+
+        // Carregar os dados dos alunos ao carregar a página
+        window.onload = fetchAlunos;
+    </script>
+</body>
 </html>

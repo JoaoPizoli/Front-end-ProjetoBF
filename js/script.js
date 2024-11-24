@@ -1,11 +1,21 @@
 let menuIcon = document.getElementById("menu-icon");
 let icons = document.querySelector('.icons');
 
-const isPageOne = window.location.pathname === '/painel'; 
-const isPageTwo = window.location.pathname === '/configuracoes'; 
+const path = window.location.pathname;
+const isPageOne = path === '/painel';
+const isPageTwo = path === '/configuracoes';
+const isEditarAluno = path === '/editar-aluno.html';
+const isEditarProfessor = path === '/editar-professor.html';
 
 function toggleIcons() {
-    const mediaQuery = isPageOne ? window.matchMedia('(max-width: 620px)') : window.matchMedia('(max-width: 877px)'); 
+    let mediaQuery;
+    if (isPageOne || isEditarAluno || isEditarProfessor) {
+        mediaQuery = window.matchMedia('(max-width: 620px)');
+    } else if (isPageTwo) {
+        mediaQuery = window.matchMedia('(max-width: 877px)');
+    } else {
+        mediaQuery = window.matchMedia('(max-width: 620px)'); // Padrão para outras páginas
+    }
 
     if (mediaQuery.matches) {
         icons.style.visibility = icons.style.visibility === "visible" ? "hidden" : "visible";
@@ -17,7 +27,14 @@ function toggleIcons() {
 menuIcon.addEventListener('click', toggleIcons);
 
 window.addEventListener('resize', function() {
-    const mediaQuery = isPageOne ? window.matchMedia('(max-width: 620px)') : window.matchMedia('(max-width: 877px)'); 
+    let mediaQuery;
+    if (isPageOne || isEditarAluno || isEditarProfessor) {
+        mediaQuery = window.matchMedia('(max-width: 620px)');
+    } else if (isPageTwo) {
+        mediaQuery = window.matchMedia('(max-width: 877px)');
+    } else {
+        mediaQuery = window.matchMedia('(max-width: 620px)'); // Padrão para outras páginas
+    }
 
     if (!mediaQuery.matches) {
         icons.style.visibility = "visible"; 
@@ -39,4 +56,3 @@ boxes.forEach(box => {
         }
     });
 });
-

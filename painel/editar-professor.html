@@ -1,0 +1,178 @@
+<!-- public/painel/editar-professor.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - Editar Professor</title>
+    <link rel="stylesheet" href="../css/editar-info.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="../img/fav-icon-musical-png.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/editar-aluno.css">
+    <script src="../js/script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Barra Lateral -->
+        <div class="lado-1">
+            <img src="../img/img-icon-menu-png.png" alt="Ícone Menu" id="menu-icon">
+            <p id="titulo">Painel de Controle</p>
+            <p id="sub-titulo-painel">Cargo: Administrador</p>
+            
+            <div class="icons">
+                <div class="link">
+                    <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
+                </div>
+                <div class="link">
+                    <i class="fa-solid fa-gear"></i> <a href="/painel/configuracoes.html">Configurações</a>
+                </div>
+                <div class="link">
+                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar Professor</a>
+                </div>
+                <div class="link">
+                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar Aluno</a>
+                </div>
+            </div>
+            <div class="user">
+                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Administrador</a>
+            </div>
+        </div>
+
+        <!-- Área Principal -->
+        <div class="lado-2">
+            <p id="titulo-painel">Editar Professor</p>
+            <p id="sub-titulo">Altere as informações do professor selecionado.</p>
+            
+            <div class="formularios">
+                <form id="editar-professor-form">
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="nome" name="nome" placeholder="Nome do Professor" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Email do Professor" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Telefone do Professor" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <input type="text" id="areaAtuacao" name="areaAtuacao" placeholder="Área de Atuação do Professor" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Nova Senha (opcional)">
+                    </div>
+                </form>
+            </div>
+            <button type="submit" id="editar-professor-submit">Salvar Alterações</button>
+        </div>
+    </div>
+
+    <script>
+        const apiUrl = 'https://projetobf.duckdns.org/professores';
+
+        // Função para obter parâmetros da URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Função para buscar dados do professor por ID
+        async function fetchProfessor(id) {
+            const token = localStorage.getItem('jwtToken');
+            try {
+                const response = await fetch(`${apiUrl}/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const professor = await response.json();
+
+                if (response.ok && professor) {
+                    document.getElementById('nome').value = professor.nome;
+                    document.getElementById('email').value = professor.email;
+                    document.getElementById('phoneNumber').value = professor.phoneNumber;
+                    document.getElementById('areaAtuacao').value = professor.areaAtuacao;
+                } else {
+                    alert('Professor não encontrado.');
+                    window.location.href = 'lista-professores.html';
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao buscar professor.');
+            }
+        }
+
+        // Função para atualizar dados do professor
+        async function updateProfessor(id, dados) {
+            const token = localStorage.getItem('jwtToken');
+            try {
+                const response = await fetch(`${apiUrl}/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(dados),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert(result.message);
+                    window.location.href = 'lista-professores.html';
+                } else {
+                    alert(result.message || 'Erro ao atualizar professor.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao atualizar professor.');
+            }
+        }
+
+        // Evento para o botão de salvar alterações
+        document.getElementById('editar-professor-submit').addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            const id = getQueryParam('id');
+            if (!id) {
+                alert('ID do professor não fornecido.');
+                window.location.href = 'lista-professores.html';
+                return;
+            }
+
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const areaAtuacao = document.getElementById('areaAtuacao').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!nome || !email || !phoneNumber || !areaAtuacao) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            const dados = { nome, email, phoneNumber, areaAtuacao };
+            if (password) dados.password = password; // Só inclui a senha se for alterada
+
+            await updateProfessor(id, dados);
+        });
+
+        // Carregar os dados do professor ao carregar a página
+        window.onload = () => {
+            const id = getQueryParam('id');
+            if (id) {
+                fetchProfessor(id);
+            } else {
+                alert('ID do professor não fornecido.');
+                window.location.href = 'lista-professores.html';
+            }
+        };
+    </script>
+</body>
+</html>
