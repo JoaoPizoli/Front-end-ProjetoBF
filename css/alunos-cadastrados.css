@@ -121,7 +121,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 35vh;
+    width: 40vh;
     height: 30vh;
     background: #C9321F;
     color: #fff;
@@ -130,71 +130,67 @@
 .box p {
     position: relative;
     bottom: 20%;
-    font-size: 16pt;
+    font-size: 12pt;
     font-weight: bold;
 }
 .box img {
     width: 80%;
 }
-
-@media (max-width: 1375px) {
-    #titulo {
-        font-size: 20pt;
+#sub-ttulo-painel {
+    color: #fff;
+    font-size: 14pt;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+@media (max-width: 1454px) {
+    .box {
+        width: 28vh;
+        height: 25vh;
+    }
+}
+@media (max-width: 1004px) {
+    .box {
+        width: 24vh;
+        height: 22vh;
+    }
+    #titulo-painel {
+        font-size: 18pt;
+    }
+    
+    #sub-titulo {
+        font-size: 12pt;
+    }
+}
+@media (max-width: 912px) {
+    .box {
+        width: 22vh;
+        height: 22vh;
+    }
+    #titulo-painel {
+        font-size: 16pt;
+    }
+    #sub-titulo {
+        font-size: 14pt;
+    }
+}
+@media (max-width: 852px) {
+    .box {
+        width: 18vh;
+        height: 20vh;
+    }
+    .box p {
+        font-size: 10pt;
+    }
+    #titulo-painel {
+        font-size: 14pt;
     }
     #sub-titulo {
         font-size: 12pt;
     }
-    .box {
-        width: 25vh;
-        height: 20vh;
-    }
 }
-@media (max-width: 1005px) {
-    #titulo {
-        font-size: 16pt;
-    }
-    #sub-titulo {
-        font-size: 10pt;
-    }
-    .box {
-        width: 20vh;
-        height: 18vh;
-    }
-    .link {
-        font-size: 16pt;
-    }
-}
-@media (max-width: 822px) {
-    #titulo {
-        font-size: 16pt;
-    }
-    #sub-titulo {
-        font-size: 10pt;
-    }
-    .box {
-        width: 18vh;
-        height: 15vh;
-    }
-    .link {
-        font-size: 14pt;
-    }
-}
-@media (max-width: 735px) {
-    #titulo {
-        font-size: 16pt;
-    }
-    #sub-titulo {
-        font-size: 10pt;
-    }
-    .box {
-        width: 15vh;
-        height: 15vh;
-    }
-    .link {
-        font-size: 12.5pt;
-    }
-}
-@media (max-width: 620px) {
+@media (max-width: 712px) {
     .container {
         grid-template-columns: repeat(1, 1fr);
     }
@@ -230,20 +226,27 @@
     }
     .box {
         width: 20vh;
-        height: 15vh;
+        height: 20vh;
+    }
+    .link a {
+        font-size: 14pt;
     }
 }
 @media (max-width: 511px) {
     .box {
-        width: 16vh;
+        width: 20vh;
         height: 14vh;
     }
     .box p {
-        font-size: 14pt;
+        position: relative;
+        font-size: 10pt;
         font-weight: normal;
     }
     .lado-1 img {
         margin-top: 100px;
+    }
+    .link a {
+        font-size: 12pt;
     }
 }
 @media (max-width: 400px) {
@@ -252,5 +255,9 @@
     }
     .link {
         font-size: 10pt;
+    }
+    .box {
+        height: 20vh;
+        height: 20vh;
     }
 }

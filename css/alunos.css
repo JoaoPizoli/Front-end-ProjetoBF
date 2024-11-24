@@ -40,6 +40,14 @@
     display: block;
     margin: 24px auto auto;
 }
+#sub-ttulo-painel {
+    color: #fff;
+    font-size: 14pt;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
 .link {
     display: flex;
     margin-bottom: 10px;
