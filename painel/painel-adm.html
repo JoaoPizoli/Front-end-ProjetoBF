@@ -32,6 +32,9 @@
                     <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
                 </div>
             </div>
+            <div class="user">
+                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Admin</a>
+            </div>
         </div>
         <div class="lado-2">
             <p id="titulo-painel">
@@ -57,12 +60,12 @@
         </div>
     </div>
     <script>
-        // Verificar o tipo de usuário
+        
         const token = localStorage.getItem('jwtToken');
         const userLink = document.querySelector('.user a');
 
         if (token) {
-            fetch('https://projetobf.duckdns.org/usuarios/me', { // Endpoint para obter informações do usuário
+            fetch('https://projetobf.duckdns.org/usuarios/me', { 
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
