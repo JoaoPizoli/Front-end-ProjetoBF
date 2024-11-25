@@ -32,9 +32,7 @@
                     <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
                 </div>
             </div>
-            <div class="user">
-                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Admin</a>
-            </div>
+            
         </div>
         <div class="lado-2">
             <p id="titulo-painel">
@@ -92,11 +90,6 @@
                     }
                 }
             })
-            .catch(error => {
-                console.error('Erro ao obter informações do usuário:', error);
-                alert('Erro ao obter informações do usuário.');
-                window.location.href = '/painel-adm.html';
-            });
         } else {
             // Redirecionar para a página de login se não estiver autenticado
             window.location.href = '../index.html';
