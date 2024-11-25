@@ -4,34 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Informações da Conta</title>
-    <link rel="stylesheet" href="../css/editar-info.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/editar-informacoes.css">
+    <link rel="stylesheet" href="../css/editar-info.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../img/img/fav-icon-musical-png.png" type="image/x-icon">
-    <script src="../js/script.js" defer></script>
+    <title>Alunos - Cadastrados Violão</title>
 </head>
 <body>
     <div class="container">
-        <!-- Barra Lateral -->
         <div class="lado-1">
+
             <img src="../img/img-icon-menu-png.png" alt="" id="menu-icon">
+
             <p id="titulo">Painel de controle</p>
-            <p id="sub-ttulo-painel">Cargo: <span id="cargo"></span></p>
+            <p id="sub-ttulo-painel">Cargo: Administrador</p>
             
             <div class="icons">
                 <div class="link">
                     <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
                 </div>
-                <div class="link" id="professor-links" style="display: none;">
-                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
-                </div>
-                <div class="link" id="admin-links" style="display: none;">
+                <div class="link">
                     <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
+                </div>
+
+                <div class="link">
+                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
                 </div>
             </div>
         </div>
@@ -43,15 +45,15 @@
                 Veja e altere as informações da sua conta.
             </p>
             <br>
-            <div class="formularios">
-                <form id="editar-informacoes-form">
+            <div class="fomrularios">
+                <form>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-user"></i>
-                        <input type="text" id="nome" name="nome" placeholder="Nome">
+                        <input type="text" id="nome" name="nome" placeholder="Nivaldo andrade">
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="email" name="email" placeholder="Email">
+                        <input type="email" id="email" name="email" placeholder="nivaldo@teste.com">
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-guitar"></i>
@@ -66,85 +68,6 @@
             <button id="salvar-edicao-conta">Salvar edição</button>
         </div>
     </div>
-    <script>
-        // Verificar o tipo de usuário e carregar as informações
-        const token = localStorage.getItem('jwtToken');
-        const cargoSpan = document.getElementById('cargo');
-        const professorLinks = document.getElementById('professor-links');
-        const adminLinks = document.getElementById('admin-links');
-
-        if (token) {
-            fetch('https://projetobf.duckdns.org/usuarios/me', { // Endpoint para obter informações do usuário
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.role) {
-                    cargoSpan.textContent = data.role.charAt(0).toUpperCase() + data.role.slice(1);
-                    if (data.role === 'admin') {
-                        adminLinks.style.display = 'block';
-                    } else if (data.role === 'professor') {
-                        professorLinks.style.display = 'block';
-                    }
-
-                    // Preencher os campos do formulário com as informações do usuário
-                    document.getElementById('nome').value = data.nome;
-                    document.getElementById('email').value = data.email;
-                    // Se o usuário for professor, pode ter mais informações
-                    // Aqui assumimos que 'instrumento' não é relevante para professores, mas pode ser ajustado
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao obter informações do usuário:', error);
-            });
-        } else {
-            alert('Usuário não autenticado.');
-            window.location.href = '../index.html';
-        }
-
-        // Evento para o botão de salvar edição
-        document.getElementById('salvar-edicao-conta').addEventListener('click', async (event) => {
-            event.preventDefault();
-
-            const nome = document.getElementById('nome').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const instrumento = document.getElementById('instrumento').value.trim();
-            const senha = document.getElementById('senha').value.trim();
-
-            if (!nome || !email || !instrumento) {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
-            }
-
-            const dados = { nome, email, instrumento };
-            if (senha) dados.password = senha; // Só inclui a senha se for alterada
-
-            try {
-                const response = await fetch('https://projetobf.duckdns.org/usuarios/me', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(dados),
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    alert('Informações atualizadas com sucesso!');
-                    // Atualizar localStorage se necessário
-                } else {
-                    alert(data.message || 'Erro ao atualizar informações.');
-                }
-            } catch (error) {
-                console.error('Erro na requisição:', error);
-                alert('Erro ao atualizar informações.');
-            }
-        });
-    </script>
+    <script src="../js/script.js"></script>
 </body> 
 </html>

@@ -3,14 +3,16 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Aluno</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - Editar Aluno</title>
+    <link rel="stylesheet" href="../css/editar-info.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/editar-aluno.css">
+    <script src="../js/script.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/editar-aluno.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="../img/img/fav-icon-musical-png.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/img/fav-icon-musical-png.png" type="image/x-icon">
 </head>
 <body>
     <div class="container">
@@ -18,17 +20,17 @@
         <div class="lado-1">
             <img src="../img/img-icon-menu-png.png" alt="Ícone Menu" id="menu-icon">
             <p id="titulo">Painel de Controle</p>
-            <p id="sub-titulo-painel">Cargo: <span id="cargo"></span></p>
+            <p id="sub-titulo-painel">Cargo: Administrador</p>
             
             <div class="icons">
                 <div class="link">
                     <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
                 </div>
-                <div class="link" id="professor-links" style="display: none;">
-                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
+                <div class="link">
+                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar Professor</a>
                 </div>
-                <div class="link" id="admin-links" style="display: none;">
-                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
+                <div class="link">
+                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar Aluno</a>
                 </div>
             </div>
         </div>
@@ -54,13 +56,7 @@
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-guitar"></i>
-                        <select id="instrumento" name="instrumento" required>
-                            <option value="" disabled>Selecione o instrumento</option>
-                            <option value="Violão">Violão</option>
-                            <option value="Violino">Violino</option>
-                            <option value="Flauta">Flauta</option>
-                            <option value="Bateria">Bateria</option>
-                        </select>
+                        <input type="text" id="instrumento" name="instrumento" placeholder="Instrumento" required>
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-id-card"></i>
@@ -75,6 +71,7 @@
             <button type="submit" id="editar-aluno-submit">Salvar Alterações</button>
         </div>
     </div>
+
     <script>
         const apiUrl = 'https://projetobf.duckdns.org/alunos';
 
@@ -155,7 +152,7 @@
             const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim();
             const phoneNumber = document.getElementById('phoneNumber').value.trim();
-            const instrumento = document.getElementById('instrumento').value;
+            const instrumento = document.getElementById('instrumento').value.trim();
             const matricula = document.getElementById('matricula').value.trim();
             const dataNascimento = document.getElementById('dataNascimento').value;
 

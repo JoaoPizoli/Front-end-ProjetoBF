@@ -3,14 +3,16 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Professor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - Editar Professor</title>
+    <link rel="stylesheet" href="../css/editar-info.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/editar-aluno.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/editar-professor.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="../img/img/fav-icon-musical-png.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/img/fav-icon-musical-png.png" type="image/x-icon">
+    <script src="../js/script.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -22,13 +24,13 @@
             
             <div class="icons">
                 <div class="link">
-                    <i class="fa-solid fa-house"></i> <a href="/painel/painel-adm.html">Início</a>
+                    <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
                 </div>
-                <div class="link" id="professor-links" style="display: none;">
-                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
+                <div class="link">
+                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar Professor</a>
                 </div>
-                <div class="link" id="admin-links" style="display: none;">
-                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
+                <div class="link">
+                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar Aluno</a>
                 </div>
             </div>
         </div>
@@ -54,13 +56,7 @@
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-briefcase"></i>
-                        <select id="areaAtuacao" name="areaAtuacao" required>
-                            <option value="" disabled>Selecione a área de atuação</option>
-                            <option value="Violão">Violão</option>
-                            <option value="Violino">Violino</option>
-                            <option value="Flauta">Flauta</option>
-                            <option value="Bateria">Bateria</option>
-                        </select>
+                        <input type="text" id="areaAtuacao" name="areaAtuacao" placeholder="Área de Atuação do Professor" required>
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-lock"></i>
@@ -71,6 +67,7 @@
             <button type="submit" id="editar-professor-submit">Salvar Alterações</button>
         </div>
     </div>
+
     <script>
         const apiUrl = 'https://projetobf.duckdns.org/professores';
 
@@ -149,7 +146,7 @@
             const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim();
             const phoneNumber = document.getElementById('phoneNumber').value.trim();
-            const areaAtuacao = document.getElementById('areaAtuacao').value;
+            const areaAtuacao = document.getElementById('areaAtuacao').value.trim();
             const password = document.getElementById('password').value.trim();
 
             if (!nome || !email || !phoneNumber || !areaAtuacao) {

@@ -21,7 +21,7 @@
         <div class="lado-2">
             <p id="titulo-criar-conta">Faça login em sua conta</p>
             <div class="formularios">
-                <form id="login-form">
+                <form>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-envelope"></i>
                         <input type="text" id="email" name="email" placeholder="Email" required>
@@ -29,14 +29,6 @@
                     <div class="formulario-icones">
                         <i class="fa-solid fa-lock"></i>
                         <input type="password" id="password" name="senha" placeholder="*********" required>
-                    </div>
-                    <div class="formulario-icones">
-                        <i class="fa-solid fa-user-tag"></i>
-                        <select id="role" name="role" required>
-                            <option value="" disabled selected>Selecione o tipo de usuário</option>
-                            <option value="admin">Administrador</option>
-                            <option value="professor">Professor</option>
-                        </select>
                     </div>
                 </form>
             </div>
@@ -53,18 +45,16 @@
         </div>
     </div>
     <script>
-        // URLs corretas da API com HTTP e porta 8080
-        const apiUrlAdmin = 'https://projetobf.duckdns.org/admin/login'; 
-        const apiUrlProfessor = 'https://projetobf.duckdns.org/professor/login'; 
+        // URL correta da API com HTTP e porta 8080
+        const apiUrl = 'https://projetobf.duckdns.org/admin/login'; 
 
         document.getElementById('entrar').addEventListener('click', async (event) => {
             event.preventDefault();
 
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
-            const role = document.getElementById('role').value;
 
-            if (!email || !password || !role) {
+            if (!email || !password) {
                 alert('Por favor, preencha todos os campos.');
                 return;
             }
@@ -73,13 +63,6 @@
                 email,
                 password,
             };
-
-            let apiUrl;
-            if (role === 'admin') {
-                apiUrl = apiUrlAdmin;
-            } else if (role === 'professor') {
-                apiUrl = apiUrlProfessor;
-            }
 
             try {
                 const response = await fetch(apiUrl, {
@@ -92,22 +75,12 @@
 
                 const data = await response.json();
 
-                if (role === 'admin') {
-                    if (response.ok) {
-                        localStorage.setItem('emailUsuario', email);
-                        alert('Código de verificação enviado para o seu celular.');
-                        window.location.href = 'validar-login.html';
-                    } else {
-                        alert(data.message || 'Erro ao fazer login.');
-                    }
-                } else if (role === 'professor') {
-                    if (response.ok) {
-                        localStorage.setItem('jwtToken', data.token);
-                        alert('Login bem-sucedido!');
-                        window.location.href = 'painel/painel.html';
-                    } else {
-                        alert(data.message || 'Erro ao fazer login.');
-                    }
+                if (response.ok) {
+                    localStorage.setItem('emailUsuario', email);
+                    alert('Código de verificação enviado para o seu celular.');
+                    window.location.href = 'validar-login.html';
+                } else {
+                    alert(data.message || 'Erro ao fazer login.');
                 }
             } catch (error) {
                 console.error('Erro na requisição:', error);
