@@ -60,4 +60,58 @@
                         <input type="number" id="phoneNumber" name="Telefone" placeholder="Telefone do Aluno" required>
                     </div>
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-
+                        <i class="fa-solid fa-pencil"></i>
+                        <input type="text" id="instrumento" name="instrumento" placeholder="Instrumento" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-id-card"></i>
+                        <input type="text" id="matricula" name="matricula" placeholder="Matrícula" required>
+                    </div>
+                    <div class="formulario-icones">
+                        <i class="fa-solid fa-calendar"></i>
+                        <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" required>
+                    </div>
+                
+                </form>
+            </div>
+            <button type="submit" id="cadastrar-aluno">Cadastrar</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('cadastrar-aluno').addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const instrumento = document.getElementById('instrumento').value;
+            const matricula = document.getElementById('matricula').value
+            const dataNascimento = document.getElementById('dataNascimento').value;
+
+            const dados = { nome, email, phoneNumber, instrumento, matricula, dataNascimento };
+
+            try {
+                const response = await fetch('https://projetobf.duckdns.org/alunos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+                    },
+                    body: JSON.stringify(dados),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Aluno criado com sucesso!');
+                } else {
+                    alert(data.message || 'Erro ao criar aluno.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao criar aluno.');
+            }
+        });
+    </script>
+</body> 
+</html>
