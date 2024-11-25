@@ -11,6 +11,9 @@
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../img/fav-icon-musical-png.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="../img/img/fav-icon-musical-png.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -18,14 +21,10 @@
         <div class="lado-1">
             <img src="../img/img-icon-menu-png.png" alt="Ícone Menu" id="menu-icon">
             <p id="titulo">Painel de Controle</p>
-            <p id="sub-titulo-painel">Cargo: Administrador</p>
             
             <div class="icons">
                 <div class="link">
                     <i class="fa-solid fa-house"></i> <a href="/painel/painel-adm.html">Início</a>
-                </div>
-                <div class="link">
-                    <i class="fa-solid fa-gear"></i> <a href="/painel/configuracoes.html">Configurações</a>
                 </div>
                 <div class="link">
                     <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
@@ -33,9 +32,6 @@
                 <div class="link">
                     <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
                 </div>
-            </div>
-            <div class="user">
-                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Admin</a>
             </div>
         </div>
 
@@ -59,8 +55,7 @@
                         <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Telefone do Professor" required>
                     </div>
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-briefcase"></i>
-                        <select id="areaAtuacao" name="areaAtuacao" required>
+                        <select id="areaAtuacao" name="areaAtuacao" required class="instrumento-select">
                             <option value="" disabled selected>Selecione a Área de Atuação</option>
                             <option value="Violão">Violão</option>
                             <option value="Violino">Violino</option>

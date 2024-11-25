@@ -135,8 +135,26 @@
     color: #9C9C9C;
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
+}
+#instrumento-select,.instrumento-select {
+    padding: 10px;
+    width: 300px;
+    margin: 15px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
 }  
-#cadastrar-aluno,#cadastro-professor-form-submit {
+#instrumento-select,.instrumento-select {
+    padding: 10px;
+    width: 300px;
+    margin: 15px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+#cadastrar-aluno,#cadastro-professor-form-submit,#cadastrar-aluno,#cadastro-professor-submit {
     width: 200px;
     height: 50px;
     border-radius: 20px;
@@ -150,7 +168,7 @@
     text-transform: uppercase;
     margin: 25px;
 }
-#cadastrar-aluno:hover,#cadastro-professor-form-submit:hover {
+#cadastrar-aluno:hover,#cadastro-professor-form-submit:hover,#cadastrar-aluno,#cadastro-professor-submit {
     transform: translateY(-5px);
     cursor: pointer;
 }
