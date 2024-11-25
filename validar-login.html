@@ -71,7 +71,7 @@
                 if (response.ok) {
                     localStorage.setItem('jwtToken', data.token);
                     alert('Login bem-sucedido!');
-                    window.location.href = 'painel/painel.html';
+                    window.location.href = 'painel/painel-adm.html';
                 } else {
                     alert(data.message || 'Erro ao validar o código.');
                 }

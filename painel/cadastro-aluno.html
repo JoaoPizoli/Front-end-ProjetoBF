@@ -8,10 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/cadastros.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../img/fav-icon-musical-png.png" type="image/x-icon">
     <title>Painel de controle - Cadastrar aluno</title>
@@ -35,6 +33,9 @@
                 <div class="link">
                     <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
                 </div>
+            </div>
+            <div class="user">
+                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Admin</a>
             </div>
         </div>
         <div class="lado-2">
@@ -102,6 +103,7 @@
                     // Preencher o campo de instrumento com o instrumento do professor
                     const instrumentoSelect = document.getElementById('instrumento');
                     instrumentoSelect.innerHTML = `<option value="${data.areaAtuacao}" selected>${data.areaAtuacao}</option>`;
+                    instrumentoSelect.disabled = true;
                 } else {
                     alert('Você não tem permissão para acessar esta página.');
                     window.location.href = '../index.html';

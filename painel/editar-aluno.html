@@ -88,7 +88,7 @@
         async function fetchAluno(id) {
             const token = localStorage.getItem('jwtToken');
             try {
-                const response = await fetch(`${apiUrl}/${id}`, {
+                const response = await fetch(`${apiUrl}/${id}`, { // Template literal corrigido
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -118,7 +118,7 @@
         async function updateAluno(id, dados) {
             const token = localStorage.getItem('jwtToken');
             try {
-                const response = await fetch(`${apiUrl}/${id}`, {
+                const response = await fetch(`${apiUrl}/${id}`, { // Template literal corrigido
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',

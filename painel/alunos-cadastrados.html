@@ -108,7 +108,7 @@
         // Função para buscar todos os alunos (Admin)
         async function fetchAlunos() {
             try {
-                const response = await fetch(apiUrl, {
+                const response = await fetch(`${apiUrl}`, { // Usando template literal corretamente
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -131,7 +131,7 @@
         // Função para buscar alunos por instrumento
         async function fetchAlunosByInstrumento(instrumento) {
             try {
-                const response = await fetch(`${apiUrl}/instrumento/${instrumento}`, {
+                const response = await fetch(`${apiUrl}/instrumento/${instrumento}`, { // Template literal corrigido
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -154,7 +154,7 @@
         // Função para deletar um aluno
         async function deleteAluno(id) {
             try {
-                const response = await fetch(`${apiUrl}/${id}`, {
+                const response = await fetch(`${apiUrl}/${id}`, { // Template literal corrigido
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`
