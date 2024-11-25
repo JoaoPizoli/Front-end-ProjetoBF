@@ -19,20 +19,19 @@
 <body>
     <div class="container">
         <div class="lado-1">
-
             <img src="../img/img-icon-menu-png.png" alt="" id="menu-icon">
-
+    
             <p id="titulo">Painel de controle</p>
             <p id="sub-ttulo-painel">Cargo: Administrador</p>
             
             <div class="icons">
                 <div class="link">
-                    <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
+                    <i class="fa-solid fa-house"></i> <a href="/painel/painel-adm.html">Início</a>
                 </div>
                 <div class="link">
                     <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
                 </div>
-
+    
                 <div class="link">
                     <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
                 </div>
@@ -43,10 +42,10 @@
                 Cadastro de aluno
             </p>
             <p id="sub-titulo">
-                Cadastre os alunos nas diciplinas
+                Cadastre os alunos nas disciplinas
             </p>
             <div class="formularios">
-                <form>
+                <form id="cadastro-aluno-form">
                     <div class="formulario-icones">
                         <i class="fa-solid fa-user-graduate"></i>
                         <input type="text" id="nome" name="nome" placeholder="Nome do aluno" required>
@@ -56,12 +55,16 @@
                         <input type="email" id="email" name="email" placeholder="Email do aluno" required>
                     </div>
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-id-card"></i>
-                        <input type="number" id="phoneNumber" name="Telefone" placeholder="Telefone do Aluno" required>
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="text" id="phoneNumber" name="Telefone" placeholder="Telefone do Aluno" required>
                     </div>
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-pencil"></i>
-                        <input type="text" id="instrumento" name="instrumento" placeholder="Instrumento" required>
+                        <i class="fa-solid fa-guitar"></i>
+                        <!-- Campo de Instrumento como seleção fixa -->
+                        <select id="instrumento" name="instrumento" required>
+                            <option value="" disabled selected>Escolha o Instrumento</option>
+                            <!-- Opções serão preenchidas dinamicamente com base no instrumento do professor -->
+                        </select>
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-id-card"></i>
@@ -71,47 +74,89 @@
                         <i class="fa-solid fa-calendar"></i>
                         <input type="date" id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" required>
                     </div>
-                
                 </form>
             </div>
             <button type="submit" id="cadastrar-aluno">Cadastrar</button>
         </div>
     </div>
     <script>
-        document.getElementById('cadastrar-aluno').addEventListener('click', async (event) => {
-            event.preventDefault();
+        const apiUrl = 'https://projetobf.duckdns.org/alunos';
+        const instrumentosDisponiveis = ['Violão', 'Violino', 'Piano', 'Flauta', 'Bateria'];
 
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            const instrumento = document.getElementById('instrumento').value;
-            const matricula = document.getElementById('matricula').value
-            const dataNascimento = document.getElementById('dataNascimento').value;
+        // Obter o token e verificar o tipo de usuário
+        const token = localStorage.getItem('jwtToken');
 
-            const dados = { nome, email, phoneNumber, instrumento, matricula, dataNascimento };
-
+        // Função para buscar dados do usuário logado
+        async function fetchUserData() {
             try {
-                const response = await fetch('https://projetobf.duckdns.org/alunos', {
-                    method: 'POST',
+                const response = await fetch('https://projetobf.duckdns.org/usuarios/me', {
+                    method: 'GET',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
-                    },
-                    body: JSON.stringify(dados),
+                        'Authorization': `Bearer ${token}`
+                    }
                 });
 
                 const data = await response.json();
 
+                if (response.ok && data.role === 'professor') {
+                    // Preencher o campo de instrumento com o instrumento do professor
+                    const instrumentoSelect = document.getElementById('instrumento');
+                    instrumentoSelect.innerHTML = `<option value="${data.areaAtuacao}" selected>${data.areaAtuacao}</option>`;
+                } else {
+                    alert('Você não tem permissão para acessar esta página.');
+                    window.location.href = '../index.html';
+                }
+            } catch (error) {
+                console.error('Erro ao obter dados do usuário:', error);
+                alert('Erro ao obter dados do usuário.');
+                window.location.href = '../index.html';
+            }
+        }
+
+        document.getElementById('cadastrar-aluno').addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const instrumento = document.getElementById('instrumento').value;
+            const matricula = document.getElementById('matricula').value.trim();
+            const dataNascimento = document.getElementById('dataNascimento').value;
+
+            if (!nome || !email || !phoneNumber || !instrumento || !matricula || !dataNascimento) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            const dados = { nome, email, phoneNumber, instrumento, matricula, dataNascimento };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(dados),
+                });
+
+                const dataResponse = await response.json();
+
                 if (response.ok) {
                     alert('Aluno criado com sucesso!');
+                    // Limpar o formulário
+                    document.getElementById('cadastro-aluno-form').reset();
                 } else {
-                    alert(data.message || 'Erro ao criar aluno.');
+                    alert(dataResponse.message || 'Erro ao criar aluno.');
                 }
             } catch (error) {
                 console.error('Erro na requisição:', error);
                 alert('Erro ao criar aluno.');
             }
         });
+
+        // Carregar os dados do usuário ao carregar a página
+        window.onload = fetchUserData;
     </script>
 </body> 
 </html>

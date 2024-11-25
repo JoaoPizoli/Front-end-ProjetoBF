@@ -20,8 +20,19 @@
         </div>
         <div class="lado-2">
             <p id="titulo-criar-conta">Faça login em sua conta</p>
+
+            <!-- Seleção de Tipo de Usuário -->
+            <div class="tipo-usuario">
+                <label>
+                    <input type="radio" name="tipoUsuario" value="admin" checked> Administrador
+                </label>
+                <label>
+                    <input type="radio" name="tipoUsuario" value="professor"> Professor
+                </label>
+            </div>
+
             <div class="formularios">
-                <form>
+                <form id="login-form">
                     <div class="formulario-icones">
                         <i class="fa-solid fa-envelope"></i>
                         <input type="text" id="email" name="email" placeholder="Email" required>
@@ -45,46 +56,75 @@
         </div>
     </div>
     <script>
-        // URL correta da API com HTTP e porta 8080
-        const apiUrl = 'https://projetobf.duckdns.org/admin/login'; 
+        // URLs das APIs
+        const apiUrlAdmin = 'https://projetobf.duckdns.org/admin/login';
+        const apiUrlProfessor = 'https://projetobf.duckdns.org/professor/login';
+        const apiUrlVerifyCode = 'https://projetobf.duckdns.org/admin/verify-code';
 
         document.getElementById('entrar').addEventListener('click', async (event) => {
             event.preventDefault();
 
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
+            const tipoUsuario = document.querySelector('input[name="tipoUsuario"]:checked').value;
 
             if (!email || !password) {
                 alert('Por favor, preencha todos os campos.');
                 return;
             }
 
-            const dados = {
-                email,
-                password,
-            };
+            if (tipoUsuario === 'admin') {
+                // Login como Admin
+                const dados = { email, password };
 
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(dados),
-                });
+                try {
+                    const response = await fetch(apiUrlAdmin, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(dados),
+                    });
 
-                const data = await response.json();
+                    const data = await response.json();
 
-                if (response.ok) {
-                    localStorage.setItem('emailUsuario', email);
-                    alert('Código de verificação enviado para o seu celular.');
-                    window.location.href = 'validar-login.html';
-                } else {
-                    alert(data.message || 'Erro ao fazer login.');
+                    if (response.ok) {
+                        localStorage.setItem('emailUsuario', email);
+                        alert('Código de verificação enviado para o seu celular.');
+                        window.location.href = 'validar-login.html';
+                    } else {
+                        alert(data.message || 'Erro ao fazer login como Administrador.');
+                    }
+                } catch (error) {
+                    console.error('Erro na requisição:', error);
+                    alert('Erro ao fazer login como Administrador.');
                 }
-            } catch (error) {
-                console.error('Erro na requisição:', error);
-                alert('Erro ao fazer login.');
+            } else if (tipoUsuario === 'professor') {
+                // Login como Professor
+                const dados = { email, password };
+
+                try {
+                    const response = await fetch(apiUrlProfessor, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(dados),
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        localStorage.setItem('jwtToken', data.token);
+                        alert('Login bem-sucedido!');
+                        window.location.href = 'painel/painel-adm.html';
+                    } else {
+                        alert(data.message || 'Erro ao fazer login como Professor.');
+                    }
+                } catch (error) {
+                    console.error('Erro na requisição:', error);
+                    alert('Erro ao fazer login como Professor.');
+                }
             }
         });
     </script>

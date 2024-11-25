@@ -4,26 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de controle - Cadastrar Professor</title>
+    <title>Painel de Controle - Cadastrar Professor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/cadastros.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../img/fav-icon-musical-png.png" type="image/x-icon">
 </head>
 <body>
     <div class="container">
+        <!-- Barra Lateral -->
         <div class="lado-1">
-            <img src="../img/img-icon-menu-png.png" alt="" id="menu-icon">
+            <img src="../img/img-icon-menu-png.png" alt="Ícone Menu" id="menu-icon">
             
-            <p id="titulo">Painel de controle</p>
+            <p id="titulo">Painel de Controle</p>
             <p id="sub-ttulo-painel">Cargo: Administrador</p>
 
             <div class="icons">
                 <div class="link">
-                    <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
+                    <i class="fa-solid fa-house"></i> <a href="/painel/painel-adm.html">Início</a>
+                </div>
+                <div class="link">
+                    <i class="fa-solid fa-gear"></i> <a href="/painel/configuracoes.html">Configurações</a>
                 </div>
                 <div class="link">
                     <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
@@ -32,42 +38,60 @@
                     <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
                 </div>
             </div>
+            <div class="user">
+                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Admin</a>
+            </div>
         </div>
+
+        <!-- Área Principal -->
         <div class="lado-2">
             <p id="titulo-painel">Cadastro de Professor</p>
             <p id="sub-titulo">Realize o registro dos professores.</p>
             <div class="formularios">
                 <form id="cadastro-professor-form">
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="name" id="nome" name="nome" placeholder="Nome do Professor" required>
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="nome" name="nome" placeholder="Nome do Professor" required>
                     </div>
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-briefcase"></i>
+                        <i class="fa-solid fa-envelope"></i>
                         <input type="email" id="email" name="email" placeholder="Email do Professor" required>
                     </div>
                     <div class="formulario-icones">
-                        <i class="fa-solid fa-briefcase"></i>
-                        <input type="text" id="senha" name="senha" placeholder="Senha do Professor" required>
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="senha" name="senha" placeholder="Senha do Professor" required>
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-briefcase"></i>
-                        <input type="text" id="area" name="area" placeholder="Área de atuação do Professor!" required>
+                        <select id="areaAtuacao" name="areaAtuacao" required>
+                            <option value="" disabled selected>Selecione a Área de Atuação</option>
+                            <option value="Violão">Violão</option>
+                            <option value="Violino">Violino</option>
+                            <option value="Piano">Piano</option>
+                            <option value="Flauta">Flauta</option>
+                            <option value="Bateria">Bateria</option>
+                        </select>
                     </div>
                 </form>
             </div>
-            <button type="submit" id="cadastro-professor-form-submit">Cadastrar</button>
+            <button type="submit" id="cadastro-professor-submit">Cadastrar</button>
         </div>
     </div>
     <script>
-       const apiUrl = 'https://projetobf.duckdns.org/professores'; 
+        const apiUrl = 'https://projetobf.duckdns.org/professores'; 
 
-        document.getElementById('cadastro-professor-form-submit').addEventListener('click', async (event) => {
+        document.getElementById('cadastro-professor-submit').addEventListener('click', async (event) => {
+            event.preventDefault();
 
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('senha').value;
-            const areaAtuacao = document.getElementById('area').value;
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('senha').value.trim();
+            const areaAtuacao = document.getElementById('areaAtuacao').value.trim();
+
+            if (!nome || !email || !password || !areaAtuacao) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
 
             const dados = {
                 nome,
@@ -84,20 +108,22 @@
                         'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
                     },
                     body: JSON.stringify(dados),
-                })
+                });
 
                 const data = await response.json();
 
                 if (response.ok) {
-                    alert('Professor cadastrado!');
+                    alert('Professor cadastrado com sucesso!');
+                    // Limpar o formulário
+                    document.getElementById('cadastro-professor-form').reset();
                 } else {
-                    alert(data.message || 'Erro ao cadastrar professor');
+                    alert(data.message || 'Erro ao cadastrar professor.');
                 }
             } catch (error) {
                 console.error('Erro na requisição:', error);
-                alert('Erro ao cadastrar professor');
+                alert('Erro ao cadastrar professor.');
             }
         });
     </script>
-</body> 
+</body>
 </html>
