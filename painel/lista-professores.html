@@ -3,15 +3,14 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Controle - Professores Cadastrados</title>
-    <link rel="stylesheet" href="../css/lista-professores.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Professores Cadastrados</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/lista-professores.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="../img/img/fav-icon-musical-png.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../img/fav-icon-musical-png.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -22,7 +21,7 @@
             
             <div class="icons">
                 <div class="link">
-                    <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
+                    <i class="fa-solid fa-house"></i> <a href="/painel/painel-adm.html">Início</a>
                 </div>
                 <div class="link">
                     <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
@@ -37,7 +36,7 @@
             <p id="sub-titulo">Aqui você pode visualizar, editar e excluir os professores registrados no sistema.</p>
             
             <div class="container-box" id="professores-container">
-                
+                <!-- Professores serão carregados aqui via JavaScript -->
             </div>
         </div>
     </div>
@@ -52,7 +51,6 @@
                 const response = await fetch(apiUrl, {
                     method: 'GET',
                     headers: {
-                        'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     }
                 });

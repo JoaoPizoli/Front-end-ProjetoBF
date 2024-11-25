@@ -3,16 +3,14 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informações da Conta</title>
-    <link rel="stylesheet" href="../css/alunos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/info-conta.css">
-    <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="../img/img/fav-icon-musical-png.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -24,7 +22,7 @@
             
             <div class="icons">
                 <div class="link">
-                    <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
+                    <i class="fa-solid fa-house"></i> <a href="/painel/painel-adm.html">Início</a>
                 </div>
                 <div class="link" id="professor-links" style="display: none;">
                     <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
@@ -53,7 +51,13 @@
                     </div>
                     <div class="formulario-icones">
                         <i class="fa-solid fa-guitar"></i>
-                        <input type="text" id="instrumento" name="instrumento" placeholder="Violão" required>
+                        <select id="instrumento" name="instrumento" required>
+                            <option value="" disabled>Selecione o instrumento</option>
+                            <option value="Violão">Violão</option>
+                            <option value="Violino">Violino</option>
+                            <option value="Flauta">Flauta</option>
+                            <option value="Bateria">Bateria</option>
+                        </select>
                     </div>
                 </form>
             </div>
@@ -87,8 +91,7 @@
                     // Preencher os campos do formulário com as informações do usuário
                     document.getElementById('nome').value = data.nome;
                     document.getElementById('email').value = data.email;
-                    // Se o usuário for professor, pode ter mais informações
-                    // Aqui assumimos que 'instrumento' não é relevante para professores, mas pode ser ajustado
+                    document.getElementById('instrumento').value = data.role === 'professor' ? data.areaAtuacao : data.instrumento;
                 }
             })
             .catch(error => {
@@ -105,7 +108,7 @@
 
             const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim();
-            const instrumento = document.getElementById('instrumento').value.trim();
+            const instrumento = document.getElementById('instrumento').value;
 
             if (!nome || !email || !instrumento) {
                 alert('Por favor, preencha todos os campos.');
@@ -124,13 +127,13 @@
                     body: JSON.stringify(dados),
                 });
 
-                const data = await response.json();
+                const dataResponse = await response.json();
 
                 if (response.ok) {
                     alert('Informações atualizadas com sucesso!');
                     // Atualizar localStorage se necessário
                 } else {
-                    alert(data.message || 'Erro ao atualizar informações.');
+                    alert(dataResponse.message || 'Erro ao atualizar informações.');
                 }
             } catch (error) {
                 console.error('Erro na requisição:', error);
