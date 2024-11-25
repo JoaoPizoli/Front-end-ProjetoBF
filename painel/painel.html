@@ -1,3 +1,4 @@
+<!-- public/painel/painel.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -17,33 +18,23 @@
 <body>
     <div class="container">
         <div class="lado-1">
-
             <img src="../img/img-icon-menu-png.png" alt="" id="menu-icon">
 
             <p id="titulo">Painel de controle</p>
-            <p id="sub-ttulo-painel">Cargo: Administrador</p>
+            <p id="sub-ttulo-painel">Cargo: <span id="cargo"></span></p>
             
             <div class="icons">
                 <div class="link">
                     <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
                 </div>
-                <div class="link">
-                    <i class="fa-solid fa-gear"></i> <a href="/painel/configuracoes.html">Configurações</a>
-                </div>
-
-                <div class="link">
-                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
-                </div>
-
-                <div class="link">
+                <div class="link" id="professor-links" style="display: none;">
                     <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
                 </div>
-                <div class="link">
-                    <i class="fa-solid fa-chalkboard-user"></i> <a href="/painel/lista-professores">Professores Registrados</a>
+                <div class="link" id="admin-links" style="display: none;">
+                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
+                    <i class="fa-solid fa-users"></i> <a href="/painel/alunos-cadastrados.html">Alunos Cadastrados</a>
+                    <i class="fa-solid fa-users"></i> <a href="/painel/lista-professores.html">Professores Cadastrados</a>
                 </div>
-            </div>
-            <div class="user">
-                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Professor</a>
             </div>
         </div>
         <div class="lado-2">
@@ -60,7 +51,7 @@
                         <p>Alunos</p>
                     </div>
                 </a>
-                <a href="../painel/lista-professores.html">
+                <a href="../painel/lista-professores.html" id="link-professores" style="display: none;">
                     <div class="box">
                         <img src="../img/icon-professores-png.png" alt="Veja sobre os professores">
                         <p>Professores</p>
@@ -81,6 +72,39 @@
             </div>
         </div>
     </div>
-    <script src="../js/script.js"></script>
+    <script>
+        // Verificar o tipo de usuário
+        const token = localStorage.getItem('jwtToken');
+        const cargoSpan = document.getElementById('cargo');
+        const professorLinks = document.getElementById('professor-links');
+        const adminLinks = document.getElementById('admin-links');
+        const linkProfessores = document.getElementById('link-professores');
+
+        if (token) {
+            fetch('https://projetobf.duckdns.org/usuarios/me', { // Endpoint para obter informações do usuário
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.role) {
+                    cargoSpan.textContent = data.role.charAt(0).toUpperCase() + data.role.slice(1);
+                    if (data.role === 'admin') {
+                        adminLinks.style.display = 'block';
+                        linkProfessores.style.display = 'block';
+                    } else if (data.role === 'professor') {
+                        professorLinks.style.display = 'block';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao obter informações do usuário:', error);
+            });
+        } else {
+            cargoSpan.textContent = 'Não Autenticado';
+        }
+    </script>
 </body> 
 </html>

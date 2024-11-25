@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="../img/fav-icon-musical-png.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/editar-aluno.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
     <script src="../js/script.js" defer></script>
 </head>
 <body>
@@ -17,24 +20,18 @@
         <div class="lado-1">
             <img src="../img/img-icon-menu-png.png" alt="Ícone Menu" id="menu-icon">
             <p id="titulo">Painel de Controle</p>
-            <p id="sub-titulo-painel">Cargo: Administrador</p>
+            <p id="sub-titulo-painel">Cargo: <span id="cargo"></span></p>
             
             <div class="icons">
                 <div class="link">
                     <i class="fa-solid fa-house"></i> <a href="/painel/painel.html">Início</a>
                 </div>
-                <div class="link">
-                    <i class="fa-solid fa-gear"></i> <a href="/painel/configuracoes.html">Configurações</a>
+                <div class="link" id="professor-links" style="display: none;">
+                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar aluno</a>
                 </div>
-                <div class="link">
-                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar Professor</a>
+                <div class="link" id="admin-links" style="display: none;">
+                    <i class="fa-solid fa-circle-user"></i> <a href="/painel/cadastrar-professor.html">Cadastrar professor</a>
                 </div>
-                <div class="link">
-                    <i class="fa-solid fa-users"></i> <a href="/painel/cadastro-aluno.html">Cadastrar Aluno</a>
-                </div>
-            </div>
-            <div class="user">
-                <i class="fa-solid fa-circle-user"></i> <a href="info-conta.html">Administrador</a>
             </div>
         </div>
 
