@@ -39,7 +39,7 @@
             <p id="sub-titulo">Aqui você pode visualizar, editar e excluir os professores registrados no sistema.</p>
             
             <div class="container-box" id="professores-container">
-                <!-- Professores serão carregados aqui via JavaScript -->
+                
             </div>
         </div>
     </div>
@@ -54,6 +54,7 @@
                 const response = await fetch(apiUrl, {
                     method: 'GET',
                     headers: {
+                        'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     }
                 });
